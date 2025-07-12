@@ -38,7 +38,7 @@ const todos = [
   2. Use an anonymous function as the callback.
   3. Return only the tasks that are not completed.
   */
-  
+  let incomplete = todos.filter( (task) => task.completed == false );
   
   /*
   🔹 Task 2: Sort Tasks by Priority
@@ -48,7 +48,10 @@ const todos = [
   2. Use an anonymous function as the comparison function.
   3. Sort tasks in ascending order of priority (1 = highest).
   */
-  
+  let priority = todos.sort( (a, b) => a.priority - b.priority );
+  // !!! I know how to use this but am interested in *exactly* how this works under the hood.
+  // Though I realize it is probably a built in function written in native code.
+  // Still, I want to experiment with it when I have more time.
   
   /*
   🔹 Task 3: Mark All Tasks as Completed
@@ -58,6 +61,14 @@ const todos = [
   2. Use an anonymous function to modify each object.
   3. Change the `completed` property to `true` for every task.
   */
+  let allCompleted = todos.map((task) => {
+     // I am reconstructing the object here because I do not want to modify the original array.    
+      return {
+        task: task.task, // welcome to hell <3
+        completed: true,
+        priority: task.priority
+      }
+  });
   
   
   /*
@@ -68,14 +79,16 @@ const todos = [
   2. Then, sort the filtered results by priority using `sort()`.
   3. Use method chaining to perform both steps together.
   */
+ let incompletesPrioritized = todos.filter((task) => task.completed == false).sort((a, b) => a.priority - b.priority);
+ //This is right, but the array is already sorted when this line recieves it. Why? Is the "priorities" line affecting "todos" as well as returning a new array?
+ //Hopefully I will find an answer in the solution assignment.
   
   
   // ============================================
   // 🧪 Console Test Your Work
   // ============================================
   
-  // console.log("Incomplete Tasks:", ...);
-  // console.log("Sorted by Priority:", ...);
-  // console.log("All Tasks Completed:", ...);
-  // console.log("Sorted Incomplete Tasks:", ...);
-  
+  console.log("Incomplete Tasks:", incomplete);
+  console.log("Sorted by Priority:", priority);
+  console.log("All Tasks Completed:", allCompleted);
+  console.log("Sorted Incomplete Tasks:", incompletesPrioritized);
